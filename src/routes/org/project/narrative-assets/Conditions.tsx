@@ -13,30 +13,29 @@ import { HugeiconsIcon } from '@hugeicons/react';
 import { PlusSignIcon, Search01Icon } from '@hugeicons/core-free-icons';
 
 export const Route = createFileRoute(
-  '/org/project/narrative-assets/Variables',
+  '/org/project/narrative-assets/Conditions',
 )({
-  component: VariablesPage,
+  component: ConditionsPage,
 })
 
-const variables = [
-  { key: 'has_sword', type: 'Boolean', defaultValue: 'false', scope: 'Global' },
-  { key: 'player_gold', type: 'Integer', defaultValue: '100', scope: 'Player' },
-  { key: 'faction_rep_order', type: 'Integer', defaultValue: '0', scope: 'Global' },
-  { key: 'current_quest', type: 'String', defaultValue: '""', scope: 'Player' },
+const conditions = [
+  { id: 'COND_001', name: 'Has Sword', expression: 'player_inventory.contains("ITM_001")', type: 'Expression' },
+  { id: 'COND_002', name: 'Is Night', expression: 'world_time > 18 || world_time < 6', type: 'Expression' },
+  { id: 'COND_003', name: 'Completed Tutorial', expression: 'quest_status("QST_MAIN_01") == "completed"', type: 'State Check' },
 ]
 
-function VariablesPage() {
+function ConditionsPage() {
   return (
     <div className="flex-1 space-y-4 p-8 pt-6 overflow-y-auto">
       <div className="flex items-center justify-between space-y-2">
         <div>
-          <h2 className="text-3xl font-bold tracking-tight">Variables</h2>
-          <p className="text-muted-foreground">Global and player-scoped game state variables.</p>
+          <h2 className="text-3xl font-bold tracking-tight">Conditions</h2>
+          <p className="text-muted-foreground">Manage logical expressions and prerequisites.</p>
         </div>
         <div className="flex items-center space-x-2">
           <Button>
             <HugeiconsIcon icon={PlusSignIcon} className="mr-2 h-4 w-4" />
-            New Variable
+            New Condition
           </Button>
         </div>
       </div>
@@ -46,7 +45,7 @@ function VariablesPage() {
           <HugeiconsIcon icon={Search01Icon} className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
           <Input
             type="search"
-            placeholder="Search variables..."
+            placeholder="Search conditions..."
             className="pl-8 bg-background"
           />
         </div>
@@ -56,25 +55,25 @@ function VariablesPage() {
         <Table>
           <TableHeader>
             <TableRow className="border-border/50">
-              <TableHead className="w-[300px]">Key</TableHead>
+              <TableHead className="w-[200px]">Name</TableHead>
+              <TableHead>Expression</TableHead>
               <TableHead>Type</TableHead>
-              <TableHead>Default Value</TableHead>
-              <TableHead>Scope</TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
-            {variables.map((v) => (
-              <TableRow key={v.key} className="border-border/50">
-                <TableCell className="font-mono font-medium text-primary">
-                  {v.key}
+            {conditions.map((cond) => (
+              <TableRow key={cond.id} className="border-border/50">
+                <TableCell className="font-medium text-primary">
+                  {cond.name}
+                </TableCell>
+                <TableCell className="font-mono text-xs text-muted-foreground bg-secondary/30 p-2 rounded block w-max my-1">
+                  {cond.expression}
                 </TableCell>
                 <TableCell>
                   <span className="bg-secondary px-2 py-1 rounded text-xs">
-                    {v.type}
+                    {cond.type}
                   </span>
                 </TableCell>
-                <TableCell className="font-mono text-muted-foreground">{v.defaultValue}</TableCell>
-                <TableCell>{v.scope}</TableCell>
               </TableRow>
             ))}
           </TableBody>

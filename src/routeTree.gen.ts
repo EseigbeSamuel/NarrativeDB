@@ -12,6 +12,7 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as OrgIndexRouteImport } from './routes/org/index'
 import { Route as OrgTeamsRouteImport } from './routes/org/teams'
+import { Route as OrgProjectRouteImport } from './routes/org/project'
 import { Route as OrgBillingRouteImport } from './routes/org/billing'
 import { Route as OrgProjectIndexRouteImport } from './routes/org/project/index'
 import { Route as OrgOrgSettingIndexRouteImport } from './routes/org/org-setting/index'
@@ -21,9 +22,13 @@ import { Route as OrgAnalyticsAnalyticsRouteImport } from './routes/org/analytic
 import { Route as OrgProjectTeamTeamRouteImport } from './routes/org/project/team/Team'
 import { Route as OrgProjectSettingsSettingsRouteImport } from './routes/org/project/settings/Settings'
 import { Route as OrgProjectNarrativeAssetsVariablesRouteImport } from './routes/org/project/narrative-assets/Variables'
+import { Route as OrgProjectNarrativeAssetsStoryNodesRouteImport } from './routes/org/project/narrative-assets/StoryNodes'
 import { Route as OrgProjectNarrativeAssetsQuestRouteImport } from './routes/org/project/narrative-assets/Quest'
 import { Route as OrgProjectNarrativeAssetsLocationsRouteImport } from './routes/org/project/narrative-assets/Locations'
+import { Route as OrgProjectNarrativeAssetsItemsRouteImport } from './routes/org/project/narrative-assets/Items'
+import { Route as OrgProjectNarrativeAssetsFactionsRouteImport } from './routes/org/project/narrative-assets/Factions'
 import { Route as OrgProjectNarrativeAssetsDialogueRouteImport } from './routes/org/project/narrative-assets/Dialogue'
+import { Route as OrgProjectNarrativeAssetsConditionsRouteImport } from './routes/org/project/narrative-assets/Conditions'
 import { Route as OrgProjectNarrativeAssetsCharactersRouteImport } from './routes/org/project/narrative-assets/Characters'
 
 const IndexRoute = IndexRouteImport.update({
@@ -41,15 +46,20 @@ const OrgTeamsRoute = OrgTeamsRouteImport.update({
   path: '/org/teams',
   getParentRoute: () => rootRouteImport,
 } as any)
+const OrgProjectRoute = OrgProjectRouteImport.update({
+  id: '/org/project',
+  path: '/org/project',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const OrgBillingRoute = OrgBillingRouteImport.update({
   id: '/org/billing',
   path: '/org/billing',
   getParentRoute: () => rootRouteImport,
 } as any)
 const OrgProjectIndexRoute = OrgProjectIndexRouteImport.update({
-  id: '/org/project/',
-  path: '/org/project/',
-  getParentRoute: () => rootRouteImport,
+  id: '/',
+  path: '/',
+  getParentRoute: () => OrgProjectRoute,
 } as any)
 const OrgOrgSettingIndexRoute = OrgOrgSettingIndexRouteImport.update({
   id: '/org/org-setting/',
@@ -57,14 +67,14 @@ const OrgOrgSettingIndexRoute = OrgOrgSettingIndexRouteImport.update({
   getParentRoute: () => rootRouteImport,
 } as any)
 const OrgProjectSDKRoute = OrgProjectSDKRouteImport.update({
-  id: '/org/project/SDK',
-  path: '/org/project/SDK',
-  getParentRoute: () => rootRouteImport,
+  id: '/SDK',
+  path: '/SDK',
+  getParentRoute: () => OrgProjectRoute,
 } as any)
 const OrgProjectEditorRoute = OrgProjectEditorRouteImport.update({
-  id: '/org/project/Editor',
-  path: '/org/project/Editor',
-  getParentRoute: () => rootRouteImport,
+  id: '/Editor',
+  path: '/Editor',
+  getParentRoute: () => OrgProjectRoute,
 } as any)
 const OrgAnalyticsAnalyticsRoute = OrgAnalyticsAnalyticsRouteImport.update({
   id: '/org/analytics/Analytics',
@@ -72,50 +82,75 @@ const OrgAnalyticsAnalyticsRoute = OrgAnalyticsAnalyticsRouteImport.update({
   getParentRoute: () => rootRouteImport,
 } as any)
 const OrgProjectTeamTeamRoute = OrgProjectTeamTeamRouteImport.update({
-  id: '/org/project/team/Team',
-  path: '/org/project/team/Team',
-  getParentRoute: () => rootRouteImport,
+  id: '/team/Team',
+  path: '/team/Team',
+  getParentRoute: () => OrgProjectRoute,
 } as any)
 const OrgProjectSettingsSettingsRoute =
   OrgProjectSettingsSettingsRouteImport.update({
-    id: '/org/project/settings/Settings',
-    path: '/org/project/settings/Settings',
-    getParentRoute: () => rootRouteImport,
+    id: '/settings/Settings',
+    path: '/settings/Settings',
+    getParentRoute: () => OrgProjectRoute,
   } as any)
 const OrgProjectNarrativeAssetsVariablesRoute =
   OrgProjectNarrativeAssetsVariablesRouteImport.update({
-    id: '/org/project/narrative-assets/Variables',
-    path: '/org/project/narrative-assets/Variables',
-    getParentRoute: () => rootRouteImport,
+    id: '/narrative-assets/Variables',
+    path: '/narrative-assets/Variables',
+    getParentRoute: () => OrgProjectRoute,
+  } as any)
+const OrgProjectNarrativeAssetsStoryNodesRoute =
+  OrgProjectNarrativeAssetsStoryNodesRouteImport.update({
+    id: '/narrative-assets/StoryNodes',
+    path: '/narrative-assets/StoryNodes',
+    getParentRoute: () => OrgProjectRoute,
   } as any)
 const OrgProjectNarrativeAssetsQuestRoute =
   OrgProjectNarrativeAssetsQuestRouteImport.update({
-    id: '/org/project/narrative-assets/Quest',
-    path: '/org/project/narrative-assets/Quest',
-    getParentRoute: () => rootRouteImport,
+    id: '/narrative-assets/Quest',
+    path: '/narrative-assets/Quest',
+    getParentRoute: () => OrgProjectRoute,
   } as any)
 const OrgProjectNarrativeAssetsLocationsRoute =
   OrgProjectNarrativeAssetsLocationsRouteImport.update({
-    id: '/org/project/narrative-assets/Locations',
-    path: '/org/project/narrative-assets/Locations',
-    getParentRoute: () => rootRouteImport,
+    id: '/narrative-assets/Locations',
+    path: '/narrative-assets/Locations',
+    getParentRoute: () => OrgProjectRoute,
+  } as any)
+const OrgProjectNarrativeAssetsItemsRoute =
+  OrgProjectNarrativeAssetsItemsRouteImport.update({
+    id: '/narrative-assets/Items',
+    path: '/narrative-assets/Items',
+    getParentRoute: () => OrgProjectRoute,
+  } as any)
+const OrgProjectNarrativeAssetsFactionsRoute =
+  OrgProjectNarrativeAssetsFactionsRouteImport.update({
+    id: '/narrative-assets/Factions',
+    path: '/narrative-assets/Factions',
+    getParentRoute: () => OrgProjectRoute,
   } as any)
 const OrgProjectNarrativeAssetsDialogueRoute =
   OrgProjectNarrativeAssetsDialogueRouteImport.update({
-    id: '/org/project/narrative-assets/Dialogue',
-    path: '/org/project/narrative-assets/Dialogue',
-    getParentRoute: () => rootRouteImport,
+    id: '/narrative-assets/Dialogue',
+    path: '/narrative-assets/Dialogue',
+    getParentRoute: () => OrgProjectRoute,
+  } as any)
+const OrgProjectNarrativeAssetsConditionsRoute =
+  OrgProjectNarrativeAssetsConditionsRouteImport.update({
+    id: '/narrative-assets/Conditions',
+    path: '/narrative-assets/Conditions',
+    getParentRoute: () => OrgProjectRoute,
   } as any)
 const OrgProjectNarrativeAssetsCharactersRoute =
   OrgProjectNarrativeAssetsCharactersRouteImport.update({
-    id: '/org/project/narrative-assets/Characters',
-    path: '/org/project/narrative-assets/Characters',
-    getParentRoute: () => rootRouteImport,
+    id: '/narrative-assets/Characters',
+    path: '/narrative-assets/Characters',
+    getParentRoute: () => OrgProjectRoute,
   } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/org/billing': typeof OrgBillingRoute
+  '/org/project': typeof OrgProjectRouteWithChildren
   '/org/teams': typeof OrgTeamsRoute
   '/org/': typeof OrgIndexRoute
   '/org/analytics/Analytics': typeof OrgAnalyticsAnalyticsRoute
@@ -124,9 +159,13 @@ export interface FileRoutesByFullPath {
   '/org/org-setting/': typeof OrgOrgSettingIndexRoute
   '/org/project/': typeof OrgProjectIndexRoute
   '/org/project/narrative-assets/Characters': typeof OrgProjectNarrativeAssetsCharactersRoute
+  '/org/project/narrative-assets/Conditions': typeof OrgProjectNarrativeAssetsConditionsRoute
   '/org/project/narrative-assets/Dialogue': typeof OrgProjectNarrativeAssetsDialogueRoute
+  '/org/project/narrative-assets/Factions': typeof OrgProjectNarrativeAssetsFactionsRoute
+  '/org/project/narrative-assets/Items': typeof OrgProjectNarrativeAssetsItemsRoute
   '/org/project/narrative-assets/Locations': typeof OrgProjectNarrativeAssetsLocationsRoute
   '/org/project/narrative-assets/Quest': typeof OrgProjectNarrativeAssetsQuestRoute
+  '/org/project/narrative-assets/StoryNodes': typeof OrgProjectNarrativeAssetsStoryNodesRoute
   '/org/project/narrative-assets/Variables': typeof OrgProjectNarrativeAssetsVariablesRoute
   '/org/project/settings/Settings': typeof OrgProjectSettingsSettingsRoute
   '/org/project/team/Team': typeof OrgProjectTeamTeamRoute
@@ -142,9 +181,13 @@ export interface FileRoutesByTo {
   '/org/org-setting': typeof OrgOrgSettingIndexRoute
   '/org/project': typeof OrgProjectIndexRoute
   '/org/project/narrative-assets/Characters': typeof OrgProjectNarrativeAssetsCharactersRoute
+  '/org/project/narrative-assets/Conditions': typeof OrgProjectNarrativeAssetsConditionsRoute
   '/org/project/narrative-assets/Dialogue': typeof OrgProjectNarrativeAssetsDialogueRoute
+  '/org/project/narrative-assets/Factions': typeof OrgProjectNarrativeAssetsFactionsRoute
+  '/org/project/narrative-assets/Items': typeof OrgProjectNarrativeAssetsItemsRoute
   '/org/project/narrative-assets/Locations': typeof OrgProjectNarrativeAssetsLocationsRoute
   '/org/project/narrative-assets/Quest': typeof OrgProjectNarrativeAssetsQuestRoute
+  '/org/project/narrative-assets/StoryNodes': typeof OrgProjectNarrativeAssetsStoryNodesRoute
   '/org/project/narrative-assets/Variables': typeof OrgProjectNarrativeAssetsVariablesRoute
   '/org/project/settings/Settings': typeof OrgProjectSettingsSettingsRoute
   '/org/project/team/Team': typeof OrgProjectTeamTeamRoute
@@ -153,6 +196,7 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/org/billing': typeof OrgBillingRoute
+  '/org/project': typeof OrgProjectRouteWithChildren
   '/org/teams': typeof OrgTeamsRoute
   '/org/': typeof OrgIndexRoute
   '/org/analytics/Analytics': typeof OrgAnalyticsAnalyticsRoute
@@ -161,9 +205,13 @@ export interface FileRoutesById {
   '/org/org-setting/': typeof OrgOrgSettingIndexRoute
   '/org/project/': typeof OrgProjectIndexRoute
   '/org/project/narrative-assets/Characters': typeof OrgProjectNarrativeAssetsCharactersRoute
+  '/org/project/narrative-assets/Conditions': typeof OrgProjectNarrativeAssetsConditionsRoute
   '/org/project/narrative-assets/Dialogue': typeof OrgProjectNarrativeAssetsDialogueRoute
+  '/org/project/narrative-assets/Factions': typeof OrgProjectNarrativeAssetsFactionsRoute
+  '/org/project/narrative-assets/Items': typeof OrgProjectNarrativeAssetsItemsRoute
   '/org/project/narrative-assets/Locations': typeof OrgProjectNarrativeAssetsLocationsRoute
   '/org/project/narrative-assets/Quest': typeof OrgProjectNarrativeAssetsQuestRoute
+  '/org/project/narrative-assets/StoryNodes': typeof OrgProjectNarrativeAssetsStoryNodesRoute
   '/org/project/narrative-assets/Variables': typeof OrgProjectNarrativeAssetsVariablesRoute
   '/org/project/settings/Settings': typeof OrgProjectSettingsSettingsRoute
   '/org/project/team/Team': typeof OrgProjectTeamTeamRoute
@@ -173,6 +221,7 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/org/billing'
+    | '/org/project'
     | '/org/teams'
     | '/org/'
     | '/org/analytics/Analytics'
@@ -181,9 +230,13 @@ export interface FileRouteTypes {
     | '/org/org-setting/'
     | '/org/project/'
     | '/org/project/narrative-assets/Characters'
+    | '/org/project/narrative-assets/Conditions'
     | '/org/project/narrative-assets/Dialogue'
+    | '/org/project/narrative-assets/Factions'
+    | '/org/project/narrative-assets/Items'
     | '/org/project/narrative-assets/Locations'
     | '/org/project/narrative-assets/Quest'
+    | '/org/project/narrative-assets/StoryNodes'
     | '/org/project/narrative-assets/Variables'
     | '/org/project/settings/Settings'
     | '/org/project/team/Team'
@@ -199,9 +252,13 @@ export interface FileRouteTypes {
     | '/org/org-setting'
     | '/org/project'
     | '/org/project/narrative-assets/Characters'
+    | '/org/project/narrative-assets/Conditions'
     | '/org/project/narrative-assets/Dialogue'
+    | '/org/project/narrative-assets/Factions'
+    | '/org/project/narrative-assets/Items'
     | '/org/project/narrative-assets/Locations'
     | '/org/project/narrative-assets/Quest'
+    | '/org/project/narrative-assets/StoryNodes'
     | '/org/project/narrative-assets/Variables'
     | '/org/project/settings/Settings'
     | '/org/project/team/Team'
@@ -209,6 +266,7 @@ export interface FileRouteTypes {
     | '__root__'
     | '/'
     | '/org/billing'
+    | '/org/project'
     | '/org/teams'
     | '/org/'
     | '/org/analytics/Analytics'
@@ -217,9 +275,13 @@ export interface FileRouteTypes {
     | '/org/org-setting/'
     | '/org/project/'
     | '/org/project/narrative-assets/Characters'
+    | '/org/project/narrative-assets/Conditions'
     | '/org/project/narrative-assets/Dialogue'
+    | '/org/project/narrative-assets/Factions'
+    | '/org/project/narrative-assets/Items'
     | '/org/project/narrative-assets/Locations'
     | '/org/project/narrative-assets/Quest'
+    | '/org/project/narrative-assets/StoryNodes'
     | '/org/project/narrative-assets/Variables'
     | '/org/project/settings/Settings'
     | '/org/project/team/Team'
@@ -228,20 +290,11 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   OrgBillingRoute: typeof OrgBillingRoute
+  OrgProjectRoute: typeof OrgProjectRouteWithChildren
   OrgTeamsRoute: typeof OrgTeamsRoute
   OrgIndexRoute: typeof OrgIndexRoute
   OrgAnalyticsAnalyticsRoute: typeof OrgAnalyticsAnalyticsRoute
-  OrgProjectEditorRoute: typeof OrgProjectEditorRoute
-  OrgProjectSDKRoute: typeof OrgProjectSDKRoute
   OrgOrgSettingIndexRoute: typeof OrgOrgSettingIndexRoute
-  OrgProjectIndexRoute: typeof OrgProjectIndexRoute
-  OrgProjectNarrativeAssetsCharactersRoute: typeof OrgProjectNarrativeAssetsCharactersRoute
-  OrgProjectNarrativeAssetsDialogueRoute: typeof OrgProjectNarrativeAssetsDialogueRoute
-  OrgProjectNarrativeAssetsLocationsRoute: typeof OrgProjectNarrativeAssetsLocationsRoute
-  OrgProjectNarrativeAssetsQuestRoute: typeof OrgProjectNarrativeAssetsQuestRoute
-  OrgProjectNarrativeAssetsVariablesRoute: typeof OrgProjectNarrativeAssetsVariablesRoute
-  OrgProjectSettingsSettingsRoute: typeof OrgProjectSettingsSettingsRoute
-  OrgProjectTeamTeamRoute: typeof OrgProjectTeamTeamRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -267,6 +320,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof OrgTeamsRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/org/project': {
+      id: '/org/project'
+      path: '/org/project'
+      fullPath: '/org/project'
+      preLoaderRoute: typeof OrgProjectRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/org/billing': {
       id: '/org/billing'
       path: '/org/billing'
@@ -276,10 +336,10 @@ declare module '@tanstack/react-router' {
     }
     '/org/project/': {
       id: '/org/project/'
-      path: '/org/project'
+      path: '/'
       fullPath: '/org/project/'
       preLoaderRoute: typeof OrgProjectIndexRouteImport
-      parentRoute: typeof rootRouteImport
+      parentRoute: typeof OrgProjectRoute
     }
     '/org/org-setting/': {
       id: '/org/org-setting/'
@@ -290,17 +350,17 @@ declare module '@tanstack/react-router' {
     }
     '/org/project/SDK': {
       id: '/org/project/SDK'
-      path: '/org/project/SDK'
+      path: '/SDK'
       fullPath: '/org/project/SDK'
       preLoaderRoute: typeof OrgProjectSDKRouteImport
-      parentRoute: typeof rootRouteImport
+      parentRoute: typeof OrgProjectRoute
     }
     '/org/project/Editor': {
       id: '/org/project/Editor'
-      path: '/org/project/Editor'
+      path: '/Editor'
       fullPath: '/org/project/Editor'
       preLoaderRoute: typeof OrgProjectEditorRouteImport
-      parentRoute: typeof rootRouteImport
+      parentRoute: typeof OrgProjectRoute
     }
     '/org/analytics/Analytics': {
       id: '/org/analytics/Analytics'
@@ -311,77 +371,137 @@ declare module '@tanstack/react-router' {
     }
     '/org/project/team/Team': {
       id: '/org/project/team/Team'
-      path: '/org/project/team/Team'
+      path: '/team/Team'
       fullPath: '/org/project/team/Team'
       preLoaderRoute: typeof OrgProjectTeamTeamRouteImport
-      parentRoute: typeof rootRouteImport
+      parentRoute: typeof OrgProjectRoute
     }
     '/org/project/settings/Settings': {
       id: '/org/project/settings/Settings'
-      path: '/org/project/settings/Settings'
+      path: '/settings/Settings'
       fullPath: '/org/project/settings/Settings'
       preLoaderRoute: typeof OrgProjectSettingsSettingsRouteImport
-      parentRoute: typeof rootRouteImport
+      parentRoute: typeof OrgProjectRoute
     }
     '/org/project/narrative-assets/Variables': {
       id: '/org/project/narrative-assets/Variables'
-      path: '/org/project/narrative-assets/Variables'
+      path: '/narrative-assets/Variables'
       fullPath: '/org/project/narrative-assets/Variables'
       preLoaderRoute: typeof OrgProjectNarrativeAssetsVariablesRouteImport
-      parentRoute: typeof rootRouteImport
+      parentRoute: typeof OrgProjectRoute
+    }
+    '/org/project/narrative-assets/StoryNodes': {
+      id: '/org/project/narrative-assets/StoryNodes'
+      path: '/narrative-assets/StoryNodes'
+      fullPath: '/org/project/narrative-assets/StoryNodes'
+      preLoaderRoute: typeof OrgProjectNarrativeAssetsStoryNodesRouteImport
+      parentRoute: typeof OrgProjectRoute
     }
     '/org/project/narrative-assets/Quest': {
       id: '/org/project/narrative-assets/Quest'
-      path: '/org/project/narrative-assets/Quest'
+      path: '/narrative-assets/Quest'
       fullPath: '/org/project/narrative-assets/Quest'
       preLoaderRoute: typeof OrgProjectNarrativeAssetsQuestRouteImport
-      parentRoute: typeof rootRouteImport
+      parentRoute: typeof OrgProjectRoute
     }
     '/org/project/narrative-assets/Locations': {
       id: '/org/project/narrative-assets/Locations'
-      path: '/org/project/narrative-assets/Locations'
+      path: '/narrative-assets/Locations'
       fullPath: '/org/project/narrative-assets/Locations'
       preLoaderRoute: typeof OrgProjectNarrativeAssetsLocationsRouteImport
-      parentRoute: typeof rootRouteImport
+      parentRoute: typeof OrgProjectRoute
+    }
+    '/org/project/narrative-assets/Items': {
+      id: '/org/project/narrative-assets/Items'
+      path: '/narrative-assets/Items'
+      fullPath: '/org/project/narrative-assets/Items'
+      preLoaderRoute: typeof OrgProjectNarrativeAssetsItemsRouteImport
+      parentRoute: typeof OrgProjectRoute
+    }
+    '/org/project/narrative-assets/Factions': {
+      id: '/org/project/narrative-assets/Factions'
+      path: '/narrative-assets/Factions'
+      fullPath: '/org/project/narrative-assets/Factions'
+      preLoaderRoute: typeof OrgProjectNarrativeAssetsFactionsRouteImport
+      parentRoute: typeof OrgProjectRoute
     }
     '/org/project/narrative-assets/Dialogue': {
       id: '/org/project/narrative-assets/Dialogue'
-      path: '/org/project/narrative-assets/Dialogue'
+      path: '/narrative-assets/Dialogue'
       fullPath: '/org/project/narrative-assets/Dialogue'
       preLoaderRoute: typeof OrgProjectNarrativeAssetsDialogueRouteImport
-      parentRoute: typeof rootRouteImport
+      parentRoute: typeof OrgProjectRoute
+    }
+    '/org/project/narrative-assets/Conditions': {
+      id: '/org/project/narrative-assets/Conditions'
+      path: '/narrative-assets/Conditions'
+      fullPath: '/org/project/narrative-assets/Conditions'
+      preLoaderRoute: typeof OrgProjectNarrativeAssetsConditionsRouteImport
+      parentRoute: typeof OrgProjectRoute
     }
     '/org/project/narrative-assets/Characters': {
       id: '/org/project/narrative-assets/Characters'
-      path: '/org/project/narrative-assets/Characters'
+      path: '/narrative-assets/Characters'
       fullPath: '/org/project/narrative-assets/Characters'
       preLoaderRoute: typeof OrgProjectNarrativeAssetsCharactersRouteImport
-      parentRoute: typeof rootRouteImport
+      parentRoute: typeof OrgProjectRoute
     }
   }
 }
 
-const rootRouteChildren: RootRouteChildren = {
-  IndexRoute: IndexRoute,
-  OrgBillingRoute: OrgBillingRoute,
-  OrgTeamsRoute: OrgTeamsRoute,
-  OrgIndexRoute: OrgIndexRoute,
-  OrgAnalyticsAnalyticsRoute: OrgAnalyticsAnalyticsRoute,
+interface OrgProjectRouteChildren {
+  OrgProjectEditorRoute: typeof OrgProjectEditorRoute
+  OrgProjectSDKRoute: typeof OrgProjectSDKRoute
+  OrgProjectIndexRoute: typeof OrgProjectIndexRoute
+  OrgProjectNarrativeAssetsCharactersRoute: typeof OrgProjectNarrativeAssetsCharactersRoute
+  OrgProjectNarrativeAssetsConditionsRoute: typeof OrgProjectNarrativeAssetsConditionsRoute
+  OrgProjectNarrativeAssetsDialogueRoute: typeof OrgProjectNarrativeAssetsDialogueRoute
+  OrgProjectNarrativeAssetsFactionsRoute: typeof OrgProjectNarrativeAssetsFactionsRoute
+  OrgProjectNarrativeAssetsItemsRoute: typeof OrgProjectNarrativeAssetsItemsRoute
+  OrgProjectNarrativeAssetsLocationsRoute: typeof OrgProjectNarrativeAssetsLocationsRoute
+  OrgProjectNarrativeAssetsQuestRoute: typeof OrgProjectNarrativeAssetsQuestRoute
+  OrgProjectNarrativeAssetsStoryNodesRoute: typeof OrgProjectNarrativeAssetsStoryNodesRoute
+  OrgProjectNarrativeAssetsVariablesRoute: typeof OrgProjectNarrativeAssetsVariablesRoute
+  OrgProjectSettingsSettingsRoute: typeof OrgProjectSettingsSettingsRoute
+  OrgProjectTeamTeamRoute: typeof OrgProjectTeamTeamRoute
+}
+
+const OrgProjectRouteChildren: OrgProjectRouteChildren = {
   OrgProjectEditorRoute: OrgProjectEditorRoute,
   OrgProjectSDKRoute: OrgProjectSDKRoute,
-  OrgOrgSettingIndexRoute: OrgOrgSettingIndexRoute,
   OrgProjectIndexRoute: OrgProjectIndexRoute,
   OrgProjectNarrativeAssetsCharactersRoute:
     OrgProjectNarrativeAssetsCharactersRoute,
+  OrgProjectNarrativeAssetsConditionsRoute:
+    OrgProjectNarrativeAssetsConditionsRoute,
   OrgProjectNarrativeAssetsDialogueRoute:
     OrgProjectNarrativeAssetsDialogueRoute,
+  OrgProjectNarrativeAssetsFactionsRoute:
+    OrgProjectNarrativeAssetsFactionsRoute,
+  OrgProjectNarrativeAssetsItemsRoute: OrgProjectNarrativeAssetsItemsRoute,
   OrgProjectNarrativeAssetsLocationsRoute:
     OrgProjectNarrativeAssetsLocationsRoute,
   OrgProjectNarrativeAssetsQuestRoute: OrgProjectNarrativeAssetsQuestRoute,
+  OrgProjectNarrativeAssetsStoryNodesRoute:
+    OrgProjectNarrativeAssetsStoryNodesRoute,
   OrgProjectNarrativeAssetsVariablesRoute:
     OrgProjectNarrativeAssetsVariablesRoute,
   OrgProjectSettingsSettingsRoute: OrgProjectSettingsSettingsRoute,
   OrgProjectTeamTeamRoute: OrgProjectTeamTeamRoute,
+}
+
+const OrgProjectRouteWithChildren = OrgProjectRoute._addFileChildren(
+  OrgProjectRouteChildren,
+)
+
+const rootRouteChildren: RootRouteChildren = {
+  IndexRoute: IndexRoute,
+  OrgBillingRoute: OrgBillingRoute,
+  OrgProjectRoute: OrgProjectRouteWithChildren,
+  OrgTeamsRoute: OrgTeamsRoute,
+  OrgIndexRoute: OrgIndexRoute,
+  OrgAnalyticsAnalyticsRoute: OrgAnalyticsAnalyticsRoute,
+  OrgOrgSettingIndexRoute: OrgOrgSettingIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
