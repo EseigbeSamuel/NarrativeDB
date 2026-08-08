@@ -13,13 +13,12 @@ import {
 } from "@/components/ui/sidebar"
 import { HugeiconsIcon } from "@hugeicons/react"
 import {
-  DashboardCircleIcon,
+  FolderOpenIcon,
   FlowIcon,
   UserMultipleIcon,
   Comment01Icon,
   TaskDone01Icon,
   Location01Icon,
-  FolderOpenIcon,
   CodeCircleIcon,
   Settings01Icon,
   CubeIcon,
@@ -35,7 +34,7 @@ const navItems = [
   {
     title: "Dashboard",
     url: "/org/project",
-    icon: DashboardCircleIcon,
+    icon: FolderOpenIcon,
   },
   {
     title: "Visual Editor",

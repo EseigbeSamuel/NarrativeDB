@@ -9,6 +9,7 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as OrgRouteImport } from './routes/org'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as OrgIndexRouteImport } from './routes/org/index'
 import { Route as OrgTeamsRouteImport } from './routes/org/teams'
@@ -31,30 +32,35 @@ import { Route as OrgProjectNarrativeAssetsDialogueRouteImport } from './routes/
 import { Route as OrgProjectNarrativeAssetsConditionsRouteImport } from './routes/org/project/narrative-assets/Conditions'
 import { Route as OrgProjectNarrativeAssetsCharactersRouteImport } from './routes/org/project/narrative-assets/Characters'
 
+const OrgRoute = OrgRouteImport.update({
+  id: '/org',
+  path: '/org',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
 const OrgIndexRoute = OrgIndexRouteImport.update({
-  id: '/org/',
-  path: '/org/',
-  getParentRoute: () => rootRouteImport,
+  id: '/',
+  path: '/',
+  getParentRoute: () => OrgRoute,
 } as any)
 const OrgTeamsRoute = OrgTeamsRouteImport.update({
-  id: '/org/teams',
-  path: '/org/teams',
-  getParentRoute: () => rootRouteImport,
+  id: '/teams',
+  path: '/teams',
+  getParentRoute: () => OrgRoute,
 } as any)
 const OrgProjectRoute = OrgProjectRouteImport.update({
-  id: '/org/project',
-  path: '/org/project',
-  getParentRoute: () => rootRouteImport,
+  id: '/project',
+  path: '/project',
+  getParentRoute: () => OrgRoute,
 } as any)
 const OrgBillingRoute = OrgBillingRouteImport.update({
-  id: '/org/billing',
-  path: '/org/billing',
-  getParentRoute: () => rootRouteImport,
+  id: '/billing',
+  path: '/billing',
+  getParentRoute: () => OrgRoute,
 } as any)
 const OrgProjectIndexRoute = OrgProjectIndexRouteImport.update({
   id: '/',
@@ -62,9 +68,9 @@ const OrgProjectIndexRoute = OrgProjectIndexRouteImport.update({
   getParentRoute: () => OrgProjectRoute,
 } as any)
 const OrgOrgSettingIndexRoute = OrgOrgSettingIndexRouteImport.update({
-  id: '/org/org-setting/',
-  path: '/org/org-setting/',
-  getParentRoute: () => rootRouteImport,
+  id: '/org-setting/',
+  path: '/org-setting/',
+  getParentRoute: () => OrgRoute,
 } as any)
 const OrgProjectSDKRoute = OrgProjectSDKRouteImport.update({
   id: '/SDK',
@@ -77,9 +83,9 @@ const OrgProjectEditorRoute = OrgProjectEditorRouteImport.update({
   getParentRoute: () => OrgProjectRoute,
 } as any)
 const OrgAnalyticsAnalyticsRoute = OrgAnalyticsAnalyticsRouteImport.update({
-  id: '/org/analytics/Analytics',
-  path: '/org/analytics/Analytics',
-  getParentRoute: () => rootRouteImport,
+  id: '/analytics/Analytics',
+  path: '/analytics/Analytics',
+  getParentRoute: () => OrgRoute,
 } as any)
 const OrgProjectTeamTeamRoute = OrgProjectTeamTeamRouteImport.update({
   id: '/team/Team',
@@ -149,6 +155,7 @@ const OrgProjectNarrativeAssetsCharactersRoute =
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/org': typeof OrgRouteWithChildren
   '/org/billing': typeof OrgBillingRoute
   '/org/project': typeof OrgProjectRouteWithChildren
   '/org/teams': typeof OrgTeamsRoute
@@ -195,6 +202,7 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/org': typeof OrgRouteWithChildren
   '/org/billing': typeof OrgBillingRoute
   '/org/project': typeof OrgProjectRouteWithChildren
   '/org/teams': typeof OrgTeamsRoute
@@ -220,6 +228,7 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/org'
     | '/org/billing'
     | '/org/project'
     | '/org/teams'
@@ -265,6 +274,7 @@ export interface FileRouteTypes {
   id:
     | '__root__'
     | '/'
+    | '/org'
     | '/org/billing'
     | '/org/project'
     | '/org/teams'
@@ -289,16 +299,18 @@ export interface FileRouteTypes {
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
-  OrgBillingRoute: typeof OrgBillingRoute
-  OrgProjectRoute: typeof OrgProjectRouteWithChildren
-  OrgTeamsRoute: typeof OrgTeamsRoute
-  OrgIndexRoute: typeof OrgIndexRoute
-  OrgAnalyticsAnalyticsRoute: typeof OrgAnalyticsAnalyticsRoute
-  OrgOrgSettingIndexRoute: typeof OrgOrgSettingIndexRoute
+  OrgRoute: typeof OrgRouteWithChildren
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/org': {
+      id: '/org'
+      path: '/org'
+      fullPath: '/org'
+      preLoaderRoute: typeof OrgRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -308,31 +320,31 @@ declare module '@tanstack/react-router' {
     }
     '/org/': {
       id: '/org/'
-      path: '/org'
+      path: '/'
       fullPath: '/org/'
       preLoaderRoute: typeof OrgIndexRouteImport
-      parentRoute: typeof rootRouteImport
+      parentRoute: typeof OrgRoute
     }
     '/org/teams': {
       id: '/org/teams'
-      path: '/org/teams'
+      path: '/teams'
       fullPath: '/org/teams'
       preLoaderRoute: typeof OrgTeamsRouteImport
-      parentRoute: typeof rootRouteImport
+      parentRoute: typeof OrgRoute
     }
     '/org/project': {
       id: '/org/project'
-      path: '/org/project'
+      path: '/project'
       fullPath: '/org/project'
       preLoaderRoute: typeof OrgProjectRouteImport
-      parentRoute: typeof rootRouteImport
+      parentRoute: typeof OrgRoute
     }
     '/org/billing': {
       id: '/org/billing'
-      path: '/org/billing'
+      path: '/billing'
       fullPath: '/org/billing'
       preLoaderRoute: typeof OrgBillingRouteImport
-      parentRoute: typeof rootRouteImport
+      parentRoute: typeof OrgRoute
     }
     '/org/project/': {
       id: '/org/project/'
@@ -343,10 +355,10 @@ declare module '@tanstack/react-router' {
     }
     '/org/org-setting/': {
       id: '/org/org-setting/'
-      path: '/org/org-setting'
+      path: '/org-setting'
       fullPath: '/org/org-setting/'
       preLoaderRoute: typeof OrgOrgSettingIndexRouteImport
-      parentRoute: typeof rootRouteImport
+      parentRoute: typeof OrgRoute
     }
     '/org/project/SDK': {
       id: '/org/project/SDK'
@@ -364,10 +376,10 @@ declare module '@tanstack/react-router' {
     }
     '/org/analytics/Analytics': {
       id: '/org/analytics/Analytics'
-      path: '/org/analytics/Analytics'
+      path: '/analytics/Analytics'
       fullPath: '/org/analytics/Analytics'
       preLoaderRoute: typeof OrgAnalyticsAnalyticsRouteImport
-      parentRoute: typeof rootRouteImport
+      parentRoute: typeof OrgRoute
     }
     '/org/project/team/Team': {
       id: '/org/project/team/Team'
@@ -494,14 +506,29 @@ const OrgProjectRouteWithChildren = OrgProjectRoute._addFileChildren(
   OrgProjectRouteChildren,
 )
 
-const rootRouteChildren: RootRouteChildren = {
-  IndexRoute: IndexRoute,
+interface OrgRouteChildren {
+  OrgBillingRoute: typeof OrgBillingRoute
+  OrgProjectRoute: typeof OrgProjectRouteWithChildren
+  OrgTeamsRoute: typeof OrgTeamsRoute
+  OrgIndexRoute: typeof OrgIndexRoute
+  OrgAnalyticsAnalyticsRoute: typeof OrgAnalyticsAnalyticsRoute
+  OrgOrgSettingIndexRoute: typeof OrgOrgSettingIndexRoute
+}
+
+const OrgRouteChildren: OrgRouteChildren = {
   OrgBillingRoute: OrgBillingRoute,
   OrgProjectRoute: OrgProjectRouteWithChildren,
   OrgTeamsRoute: OrgTeamsRoute,
   OrgIndexRoute: OrgIndexRoute,
   OrgAnalyticsAnalyticsRoute: OrgAnalyticsAnalyticsRoute,
   OrgOrgSettingIndexRoute: OrgOrgSettingIndexRoute,
+}
+
+const OrgRouteWithChildren = OrgRoute._addFileChildren(OrgRouteChildren)
+
+const rootRouteChildren: RootRouteChildren = {
+  IndexRoute: IndexRoute,
+  OrgRoute: OrgRouteWithChildren,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
