@@ -10,11 +10,17 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as OrgRouteImport } from './routes/org'
+import { Route as ProfileRouteImport } from './routes/Profile'
+import { Route as NotificationsRouteImport } from './routes/Notifications'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as OrgIndexRouteImport } from './routes/org/index'
 import { Route as OrgTeamsRouteImport } from './routes/org/teams'
 import { Route as OrgProjectRouteImport } from './routes/org/project'
 import { Route as OrgBillingRouteImport } from './routes/org/billing'
+import { Route as authRegisterRouteImport } from './routes/(auth)/Register'
+import { Route as authOtpRouteImport } from './routes/(auth)/Otp'
+import { Route as authLoginRouteImport } from './routes/(auth)/Login'
+import { Route as authForgetPasswordRouteImport } from './routes/(auth)/ForgetPassword'
 import { Route as OrgProjectIndexRouteImport } from './routes/org/project/index'
 import { Route as OrgOrgSettingIndexRouteImport } from './routes/org/org-setting/index'
 import { Route as OrgProjectSDKRouteImport } from './routes/org/project/SDK'
@@ -35,6 +41,16 @@ import { Route as OrgProjectNarrativeAssetsCharactersRouteImport } from './route
 const OrgRoute = OrgRouteImport.update({
   id: '/org',
   path: '/org',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ProfileRoute = ProfileRouteImport.update({
+  id: '/Profile',
+  path: '/Profile',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const NotificationsRoute = NotificationsRouteImport.update({
+  id: '/Notifications',
+  path: '/Notifications',
   getParentRoute: () => rootRouteImport,
 } as any)
 const IndexRoute = IndexRouteImport.update({
@@ -61,6 +77,26 @@ const OrgBillingRoute = OrgBillingRouteImport.update({
   id: '/billing',
   path: '/billing',
   getParentRoute: () => OrgRoute,
+} as any)
+const authRegisterRoute = authRegisterRouteImport.update({
+  id: '/(auth)/Register',
+  path: '/Register',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const authOtpRoute = authOtpRouteImport.update({
+  id: '/(auth)/Otp',
+  path: '/Otp',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const authLoginRoute = authLoginRouteImport.update({
+  id: '/(auth)/Login',
+  path: '/Login',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const authForgetPasswordRoute = authForgetPasswordRouteImport.update({
+  id: '/(auth)/ForgetPassword',
+  path: '/ForgetPassword',
+  getParentRoute: () => rootRouteImport,
 } as any)
 const OrgProjectIndexRoute = OrgProjectIndexRouteImport.update({
   id: '/',
@@ -155,7 +191,13 @@ const OrgProjectNarrativeAssetsCharactersRoute =
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/Notifications': typeof NotificationsRoute
+  '/Profile': typeof ProfileRoute
   '/org': typeof OrgRouteWithChildren
+  '/ForgetPassword': typeof authForgetPasswordRoute
+  '/Login': typeof authLoginRoute
+  '/Otp': typeof authOtpRoute
+  '/Register': typeof authRegisterRoute
   '/org/billing': typeof OrgBillingRoute
   '/org/project': typeof OrgProjectRouteWithChildren
   '/org/teams': typeof OrgTeamsRoute
@@ -179,6 +221,12 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/Notifications': typeof NotificationsRoute
+  '/Profile': typeof ProfileRoute
+  '/ForgetPassword': typeof authForgetPasswordRoute
+  '/Login': typeof authLoginRoute
+  '/Otp': typeof authOtpRoute
+  '/Register': typeof authRegisterRoute
   '/org/billing': typeof OrgBillingRoute
   '/org/teams': typeof OrgTeamsRoute
   '/org': typeof OrgIndexRoute
@@ -202,7 +250,13 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/Notifications': typeof NotificationsRoute
+  '/Profile': typeof ProfileRoute
   '/org': typeof OrgRouteWithChildren
+  '/(auth)/ForgetPassword': typeof authForgetPasswordRoute
+  '/(auth)/Login': typeof authLoginRoute
+  '/(auth)/Otp': typeof authOtpRoute
+  '/(auth)/Register': typeof authRegisterRoute
   '/org/billing': typeof OrgBillingRoute
   '/org/project': typeof OrgProjectRouteWithChildren
   '/org/teams': typeof OrgTeamsRoute
@@ -228,7 +282,13 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/Notifications'
+    | '/Profile'
     | '/org'
+    | '/ForgetPassword'
+    | '/Login'
+    | '/Otp'
+    | '/Register'
     | '/org/billing'
     | '/org/project'
     | '/org/teams'
@@ -252,6 +312,12 @@ export interface FileRouteTypes {
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/Notifications'
+    | '/Profile'
+    | '/ForgetPassword'
+    | '/Login'
+    | '/Otp'
+    | '/Register'
     | '/org/billing'
     | '/org/teams'
     | '/org'
@@ -274,7 +340,13 @@ export interface FileRouteTypes {
   id:
     | '__root__'
     | '/'
+    | '/Notifications'
+    | '/Profile'
     | '/org'
+    | '/(auth)/ForgetPassword'
+    | '/(auth)/Login'
+    | '/(auth)/Otp'
+    | '/(auth)/Register'
     | '/org/billing'
     | '/org/project'
     | '/org/teams'
@@ -299,7 +371,13 @@ export interface FileRouteTypes {
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  NotificationsRoute: typeof NotificationsRoute
+  ProfileRoute: typeof ProfileRoute
   OrgRoute: typeof OrgRouteWithChildren
+  authForgetPasswordRoute: typeof authForgetPasswordRoute
+  authLoginRoute: typeof authLoginRoute
+  authOtpRoute: typeof authOtpRoute
+  authRegisterRoute: typeof authRegisterRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -309,6 +387,20 @@ declare module '@tanstack/react-router' {
       path: '/org'
       fullPath: '/org'
       preLoaderRoute: typeof OrgRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/Profile': {
+      id: '/Profile'
+      path: '/Profile'
+      fullPath: '/Profile'
+      preLoaderRoute: typeof ProfileRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/Notifications': {
+      id: '/Notifications'
+      path: '/Notifications'
+      fullPath: '/Notifications'
+      preLoaderRoute: typeof NotificationsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/': {
@@ -345,6 +437,34 @@ declare module '@tanstack/react-router' {
       fullPath: '/org/billing'
       preLoaderRoute: typeof OrgBillingRouteImport
       parentRoute: typeof OrgRoute
+    }
+    '/(auth)/Register': {
+      id: '/(auth)/Register'
+      path: '/Register'
+      fullPath: '/Register'
+      preLoaderRoute: typeof authRegisterRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/(auth)/Otp': {
+      id: '/(auth)/Otp'
+      path: '/Otp'
+      fullPath: '/Otp'
+      preLoaderRoute: typeof authOtpRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/(auth)/Login': {
+      id: '/(auth)/Login'
+      path: '/Login'
+      fullPath: '/Login'
+      preLoaderRoute: typeof authLoginRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/(auth)/ForgetPassword': {
+      id: '/(auth)/ForgetPassword'
+      path: '/ForgetPassword'
+      fullPath: '/ForgetPassword'
+      preLoaderRoute: typeof authForgetPasswordRouteImport
+      parentRoute: typeof rootRouteImport
     }
     '/org/project/': {
       id: '/org/project/'
@@ -528,7 +648,13 @@ const OrgRouteWithChildren = OrgRoute._addFileChildren(OrgRouteChildren)
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  NotificationsRoute: NotificationsRoute,
+  ProfileRoute: ProfileRoute,
   OrgRoute: OrgRouteWithChildren,
+  authForgetPasswordRoute: authForgetPasswordRoute,
+  authLoginRoute: authLoginRoute,
+  authOtpRoute: authOtpRoute,
+  authRegisterRoute: authRegisterRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
